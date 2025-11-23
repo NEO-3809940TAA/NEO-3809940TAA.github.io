@@ -24,37 +24,37 @@
       ],
       "subtitle": "Precyzyjne projektowanie i realizacja oprogramowania. Jedno studio odpowiedzialne za <strong>architekturę, kod i interfejs</strong>.",
       "tags": [
-        "web applications",
+        "aplikacje webowe",
         "integracje",
         "b2b tech",
-        "consulting engineering"
+        "doradztwo techniczne"
       ]
     },
     "manifest": {
       "label": "manifest studia",
       "items": [
         {
-          "key": "form",
-          "value": "hidden in plain sight"
+          "key": "forma",
+          "value": "ukryta na widoku"
         },
         {
-          "key": "meaning",
-          "value": "intent encoded"
+          "key": "znaczenie",
+          "value": "zakodowana intencja"
         },
         {
-          "key": "value",
-          "value": "suggested by structure"
+          "key": "wartość",
+          "value": "sugerowana przez strukturę"
         },
         {
-          "key": "narrative",
-          "value": "implicit in execution"
+          "key": "narracja",
+          "value": "ukryta w realizacji"
         },
         {
-          "key": "identity",
-          "value": "pattern repetition"
+          "key": "tożsamość",
+          "value": "powtarzalny wzorzec"
         }
       ],
-      "motto": "follow the white rabbit"
+      "motto": "podążaj za białym królikiem"
     },
     "footer": {
       "left": "projekty enterprise & b2b",

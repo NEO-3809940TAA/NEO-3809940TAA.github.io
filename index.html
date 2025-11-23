@@ -61,7 +61,9 @@
     function getBrowserLocale() {
       const lang = navigator.language || navigator.userLanguage || 'en';
       const langCode = lang.split('-')[0].toLowerCase();
-      return langCode === 'pl' ? 'pl' : 'en';
+      const detectedLocale = langCode === 'pl' ? 'pl' : 'en';
+      console.log(`Detected browser language: ${lang} → Using locale: ${detectedLocale}`);
+      return detectedLocale;
     }
 
     async function loadPageData() {
@@ -71,6 +73,8 @@
         
         const locale = getBrowserLocale();
         const data = allData[locale] || allData['en'];
+        
+        console.log(`Loading content for locale: ${locale}`);
 
         document.getElementById('page-title').textContent = data.meta.title;
         document.getElementById('html-root').setAttribute('lang', data.meta.lang);
