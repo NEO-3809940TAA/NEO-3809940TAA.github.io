@@ -1,0 +1,26 @@
+# Set default behavior to automatically normalize line endings
+* text=auto
+
+# Force HTML files to be recognized as HTML
+*.html linguist-language=HTML
+*.html linguist-detectable=true
+
+# Mark CSS as supporting files
+*.css linguist-language=CSS
+*.css linguist-detectable=false
+
+# Mark JavaScript as supporting files
+*.js linguist-language=JavaScript
+*.js linguist-detectable=false
+
+# Mark JSON as supporting files
+*.json linguist-language=JSON
+*.json linguist-detectable=false
+
+# Exclude node_modules from language statistics
+node_modules/** linguist-vendored=true
+
+# Exclude package files
+package-lock.json linguist-generated=true
+package.json linguist-detectable=false
+
