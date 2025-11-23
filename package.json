@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "npm start",
+    "predeploy": "npm install && rimraf node_modules .cache .gh-pages && npm cache clean --force && npm install",
     "deploy": "gh-pages -d ."
   },
   "keywords": [
@@ -13,9 +14,9 @@
   ],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "browser-sync": "^2.29.3",
-    "gh-pages": "^6.1.1"
+    "gh-pages": "^6.3.0",
+    "rimraf": "^6.0.1"
   }
 }
-

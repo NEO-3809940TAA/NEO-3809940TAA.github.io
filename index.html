@@ -59,9 +59,8 @@
 
   <script>
     function getBrowserLocale() {
-      const lang = navigator.language || navigator.userLanguage || 'en';
-      const langCode = lang.split('-')[0].toLowerCase();
-      return langCode === 'pl' ? 'pl' : 'en';
+      if ((navigator.languages || []).some(l => l.toLowerCase().startsWith('pl'))) return 'pl';
+      return ((navigator.language || 'en').split('-')[0].toLowerCase() === 'pl') ? 'pl' : 'en';
     }
 
     async function loadPageData() {
@@ -71,6 +70,8 @@
         
         const locale = getBrowserLocale();
         const data = allData[locale] || allData['en'];
+        
+        console.log(`Loading content for locale: ${locale}`);
 
         document.getElementById('page-title').textContent = data.meta.title;
         document.getElementById('html-root').setAttribute('lang', data.meta.lang);
