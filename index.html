@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html id="html-root" lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title id="page-title">Loading...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="public/styles.css" />
+</head>
+
+<body>
+  <div class="page">
+
+    <header class="top">
+      <div class="brand">
+        <div class="logo">
+          <img id="logo-img" src="" alt="">
+        </div>
+        <div class="brand-text">
+          <strong id="brand-name"></strong>
+          <span id="brand-subtitle"></span>
+        </div>
+      </div>
+
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">☀</button>
+    </header>
+
+    <div class="layout">
+      <section>
+        <h1 class="headline" id="headline">
+        </h1>
+
+        <p class="subtitle" id="subtitle">
+        </p>
+
+        <div class="tags" id="tags">
+        </div>
+      </section>
+
+      <aside class="panel">
+        <div class="panel-label" id="manifest-label"></div>
+
+        <div id="manifest-items">
+        </div>
+
+        <div class="motto" id="motto"></div>
+      </aside>
+    </div>
+
+    <section class="team-section" id="team-section">
+      <div class="team-label" id="team-label"></div>
+      <div class="team-members" id="team-members"></div>
+    </section>
+
+    <footer class="footer">
+      <span id="footer-left"></span>
+    </footer>
+
+  </div>
+
+  <script>
+    function getBrowserLocale() {
+      const lang = navigator.language || navigator.userLanguage || 'en';
+      const langCode = lang.split('-')[0].toLowerCase();
+      return langCode === 'pl' ? 'pl' : 'en';
+    }
+
+    async function loadPageData() {
+      try {
+        const response = await fetch('public/data.json');
+        const allData = await response.json();
+        
+        const locale = getBrowserLocale();
+        const data = allData[locale] || allData['en'];
+
+        document.getElementById('page-title').textContent = data.meta.title;
+        document.getElementById('html-root').setAttribute('lang', data.meta.lang);
+
+        document.getElementById('brand-name').textContent = data.brand.name;
+        document.getElementById('brand-subtitle').textContent = data.brand.subtitle;
+        const logoImg = document.getElementById('logo-img');
+        logoImg.src = data.brand.logo.src;
+        logoImg.alt = data.brand.logo.alt;
+
+        const headline = document.getElementById('headline');
+        headline.innerHTML = '';
+        data.hero.headline.forEach((line, index) => {
+          if (index > 0) headline.appendChild(document.createElement('br'));
+          headline.appendChild(document.createTextNode(line));
+        });
+
+        const subtitle = document.getElementById('subtitle');
+        subtitle.innerHTML = data.hero.subtitle;
+
+        const tagsContainer = document.getElementById('tags');
+        tagsContainer.innerHTML = '';
+        data.hero.tags.forEach(tag => {
+          const div = document.createElement('div');
+          div.className = 'tag';
+          div.textContent = tag;
+          tagsContainer.appendChild(div);
+        });
+
+        document.getElementById('manifest-label').textContent = data.manifest.label;
+        
+        const manifestContainer = document.getElementById('manifest-items');
+        manifestContainer.innerHTML = '';
+        data.manifest.items.forEach(item => {
+          const row = document.createElement('div');
+          row.className = 'manifest-row';
+          
+          const key = document.createElement('div');
+          key.className = 'key';
+          key.textContent = item.key;
+          
+          const value = document.createElement('div');
+          value.className = 'value';
+          value.textContent = item.value;
+          
+          row.appendChild(key);
+          row.appendChild(value);
+          manifestContainer.appendChild(row);
+        });
+
+        document.getElementById('motto').textContent = data.manifest.motto;
+
+        document.getElementById('team-label').textContent = data.team.label;
+        
+        const teamContainer = document.getElementById('team-members');
+        teamContainer.innerHTML = '';
+        data.team.members.forEach(member => {
+          const memberLink = document.createElement('a');
+          memberLink.className = 'team-member';
+          if (member.link) {
+            memberLink.href = member.link;
+            memberLink.target = '_blank';
+            memberLink.rel = 'noopener noreferrer';
+          }
+          
+          const photo = document.createElement('img');
+          photo.className = 'team-member-photo';
+          photo.src = member.photo;
+          photo.alt = member.name;
+          
+          const info = document.createElement('div');
+          info.className = 'team-member-info';
+          
+          const name = document.createElement('div');
+          name.className = 'team-member-name';
+          name.textContent = member.name;
+          
+          const role = document.createElement('div');
+          role.className = 'team-member-role';
+          role.textContent = member.role;
+          
+          if (member.description) {
+            const description = document.createElement('div');
+            description.className = 'team-member-description';
+            description.textContent = member.description;
+            info.appendChild(name);
+            info.appendChild(role);
+            info.appendChild(description);
+          } else {
+            info.appendChild(name);
+            info.appendChild(role);
+          }
+          
+          memberLink.appendChild(photo);
+          memberLink.appendChild(info);
+          teamContainer.appendChild(memberLink);
+        });
+
+        document.getElementById('footer-left').textContent = data.footer.left;
+
+      } catch (error) {
+        console.error('Error loading page data:', error);
+        document.body.innerHTML = '<div class="page"><p>Error loading page data. Please check data.json file.</p></div>';
+      }
+    }
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      const html = document.documentElement;
+      const themeToggle = document.getElementById('theme-toggle');
+      
+      let theme = savedTheme;
+      
+      if (!theme) {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        theme = prefersDark ? 'dark' : 'light';
+      }
+      
+      if (theme === 'light') {
+        html.classList.add('light-theme');
+        themeToggle.textContent = '🌙';
+      } else {
+        html.classList.remove('light-theme');
+        themeToggle.textContent = '☀';
+      }
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isLight = html.classList.contains('light-theme');
+      const themeToggle = document.getElementById('theme-toggle');
+      
+      if (isLight) {
+        html.classList.remove('light-theme');
+        localStorage.setItem('theme', 'dark');
+        themeToggle.textContent = '☀';
+      } else {
+        html.classList.add('light-theme');
+        localStorage.setItem('theme', 'light');
+        themeToggle.textContent = '🌙';
+      }
+    }
+
+    document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+    initTheme();
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadPageData);
+    } else {
+      loadPageData();
+    }
+  </script>
+</body>
+</html>

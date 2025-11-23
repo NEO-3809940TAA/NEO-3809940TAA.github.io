@@ -1,0 +1,150 @@
+{
+  "pl": {
+    "meta": {
+      "title": "3809940TAA — Software Studio",
+      "lang": "pl"
+    },
+    "brand": {
+      "name": "3809940TAA",
+      "subtitle": "software studio",
+      "logo": {
+        "src": "public/3809940taa-logo-shadow.svg",
+        "alt": "3809940TAA logo"
+      }
+    },
+    "navigation": [
+      "manifest",
+      "studio",
+      "kontakt"
+    ],
+    "hero": {
+      "headline": [
+        "Systemy cyfrowe",
+        "dla wymagających zespołów"
+      ],
+      "subtitle": "Precyzyjne projektowanie i realizacja oprogramowania. Jedno studio odpowiedzialne za <strong>architekturę, kod i interfejs</strong>.",
+      "tags": [
+        "web applications",
+        "integracje",
+        "b2b tech",
+        "consulting engineering"
+      ]
+    },
+    "manifest": {
+      "label": "manifest studia",
+      "items": [
+        {
+          "key": "form",
+          "value": "hidden in plain sight"
+        },
+        {
+          "key": "meaning",
+          "value": "intent encoded"
+        },
+        {
+          "key": "value",
+          "value": "suggested by structure"
+        },
+        {
+          "key": "narrative",
+          "value": "implicit in execution"
+        },
+        {
+          "key": "identity",
+          "value": "pattern repetition"
+        }
+      ],
+      "motto": "follow the white rabbit"
+    },
+    "footer": {
+      "left": "projekty enterprise & b2b",
+      "right": "contact@3809940taa.com"
+    },
+    "team": {
+      "label": "zespół",
+      "members": [
+        {
+          "name": "Piotr Porzuczek",
+          "role": "founder",
+          "description": "E-COMMERCE FRONTEND TECHLEAD",
+          "photo": "https://i.imgur.com/abdusWh.jpeg",
+          "link": "https://porzuczek.pl/"
+        }
+      ]
+    }
+  },
+  "en": {
+    "meta": {
+      "title": "3809940TAA — Software Studio",
+      "lang": "en"
+    },
+    "brand": {
+      "name": "3809940TAA",
+      "subtitle": "software studio",
+      "logo": {
+        "src": "public/3809940taa-logo-shadow.svg",
+        "alt": "3809940TAA logo"
+      }
+    },
+    "navigation": [
+      "manifest",
+      "studio",
+      "contact"
+    ],
+    "hero": {
+      "headline": [
+        "Digital systems",
+        "for demanding teams"
+      ],
+      "subtitle": "Precise design and software implementation. One studio responsible for <strong>architecture, code and interface</strong>.",
+      "tags": [
+        "web applications",
+        "integrations",
+        "b2b tech",
+        "consulting engineering"
+      ]
+    },
+    "manifest": {
+      "label": "studio manifest",
+      "items": [
+        {
+          "key": "form",
+          "value": "hidden in plain sight"
+        },
+        {
+          "key": "meaning",
+          "value": "intent encoded"
+        },
+        {
+          "key": "value",
+          "value": "suggested by structure"
+        },
+        {
+          "key": "narrative",
+          "value": "implicit in execution"
+        },
+        {
+          "key": "identity",
+          "value": "pattern repetition"
+        }
+      ],
+      "motto": "follow the white rabbit"
+    },
+    "footer": {
+      "left": "enterprise & b2b projects",
+      "right": "contact@3809940taa.com"
+    },
+    "team": {
+      "label": "team",
+      "members": [
+        {
+          "name": "Piotr Porzuczek",
+          "role": "founder",
+          "description": "E-COMMERCE FRONTEND TECHLEAD",
+          "photo": "https://i.imgur.com/abdusWh.jpeg",
+          "link": "https://porzuczek.pl/"
+        }
+      ]
+    }
+  }
+}

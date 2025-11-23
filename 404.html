@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html id="html-root" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title id="page-title">404 — Not Found</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="public/styles.css" />
+</head>
+
+<body>
+  <div class="page page-404">
+    <header class="top">
+      <div class="brand">
+        <div class="logo">
+          <img id="logo-img" src="" alt="">
+        </div>
+        <div class="brand-text">
+          <strong id="brand-name"></strong>
+          <span id="brand-subtitle"></span>
+        </div>
+      </div>
+
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">☀</button>
+    </header>
+
+    <div class="layout">
+      <section>
+        <h1 class="error-code" id="error-code">404</h1>
+        <p class="error-message" id="error-message"></p>
+        <a href="/" class="back-link" id="back-link"></a>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    function getBrowserLocale() {
+      const lang = navigator.language || navigator.userLanguage || 'en';
+      const langCode = lang.split('-')[0].toLowerCase();
+      return langCode === 'pl' ? 'pl' : 'en';
+    }
+
+    const messages = {
+      pl: {
+        code: "404",
+        message: "Strona, której szukasz, nie została znaleziona.",
+        back: "Powrót do strony głównej",
+        title: "404 — Nie znaleziono"
+      },
+      en: {
+        code: "404",
+        message: "The page you're looking for was not found.",
+        back: "Back to homepage",
+        title: "404 — Not Found"
+      }
+    };
+
+    async function loadPageData() {
+      try {
+        const locale = getBrowserLocale();
+        const msg = messages[locale] || messages['en'];
+
+        document.getElementById('page-title').textContent = msg.title;
+        document.getElementById('html-root').setAttribute('lang', locale);
+
+        const response = await fetch('public/data.json');
+        const allData = await response.json();
+        const data = allData[locale] || allData['en'];
+
+        document.getElementById('brand-name').textContent = data.brand.name;
+        document.getElementById('brand-subtitle').textContent = data.brand.subtitle;
+        const logoImg = document.getElementById('logo-img');
+        logoImg.src = data.brand.logo.src;
+        logoImg.alt = data.brand.logo.alt;
+
+        document.getElementById('error-code').textContent = msg.code;
+        document.getElementById('error-message').textContent = msg.message;
+        document.getElementById('back-link').textContent = msg.back;
+        document.getElementById('back-link').href = '/';
+
+      } catch (error) {
+        console.error('Error loading page data:', error);
+        const locale = getBrowserLocale();
+        const msg = messages[locale] || messages['en'];
+        document.getElementById('error-code').textContent = msg.code;
+        document.getElementById('error-message').textContent = msg.message;
+        document.getElementById('back-link').textContent = msg.back;
+      }
+    }
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      const html = document.documentElement;
+      const themeToggle = document.getElementById('theme-toggle');
+      
+      let theme = savedTheme;
+      
+      if (!theme) {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        theme = prefersDark ? 'dark' : 'light';
+      }
+      
+      if (theme === 'light') {
+        html.classList.add('light-theme');
+        themeToggle.textContent = '🌙';
+      } else {
+        html.classList.remove('light-theme');
+        themeToggle.textContent = '☀';
+      }
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isLight = html.classList.contains('light-theme');
+      const themeToggle = document.getElementById('theme-toggle');
+      
+      if (isLight) {
+        html.classList.remove('light-theme');
+        localStorage.setItem('theme', 'dark');
+        themeToggle.textContent = '☀';
+      } else {
+        html.classList.add('light-theme');
+        localStorage.setItem('theme', 'light');
+        themeToggle.textContent = '🌙';
+      }
+    }
+
+    document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+    initTheme();
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadPageData);
+    } else {
+      loadPageData();
+    }
+  </script>
+</body>
+</html>
+

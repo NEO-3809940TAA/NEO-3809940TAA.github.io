@@ -1,0 +1,21 @@
+{
+  "name": "3809940taa-website",
+  "version": "1.0.0",
+  "description": "Website for 3809940TAA Software Studio",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "npm start",
+    "deploy": "gh-pages -d ."
+  },
+  "keywords": [
+    "website",
+    "github-pages"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.29.3",
+    "gh-pages": "^6.1.1"
+  }
+}
+
