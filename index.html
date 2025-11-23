@@ -59,11 +59,8 @@
 
   <script>
     function getBrowserLocale() {
-      const lang = navigator.language || navigator.userLanguage || 'en';
-      const langCode = lang.split('-')[0].toLowerCase();
-      const detectedLocale = langCode === 'pl' ? 'pl' : 'en';
-      console.log(`Detected browser language: ${lang} → Using locale: ${detectedLocale}`);
-      return detectedLocale;
+      if ((navigator.languages || []).some(l => l.toLowerCase().startsWith('pl'))) return 'pl';
+      return ((navigator.language || 'en').split('-')[0].toLowerCase() === 'pl') ? 'pl' : 'en';
     }
 
     async function loadPageData() {

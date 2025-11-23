@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "npm start",
-    "predeploy": "rimraf node_modules .cache .gh-pages && npm cache clean --force && npm install",
+    "predeploy": "npm install && rimraf node_modules .cache .gh-pages && npm cache clean --force && npm install",
     "deploy": "gh-pages -d ."
   },
   "keywords": [
